@@ -16,24 +16,29 @@ export default function UserCard() {
         <Link href={{
             pathname: "/users/test",
             // params: { id: 'test' }
-        }} className='w-full max-w-sm' asChild>
+        }} className='w-full max-w-sm p-0' asChild>
             <TouchableOpacity>
-                <Card className='w-full max-w-sm'>
-                    <CardHeader>
-                        <CardTitle>Ahmet Kaya</CardTitle>
-                        <CardDescription>Fatih - Level 1</CardDescription>
-                    </CardHeader>
-                    <CardContent>
-                        <Avatar alt="Zach Nugent's Avatar">
-                            <AvatarImage source={{ uri: "https://github.com/a0m0rajab.png" }} />
-                            <AvatarFallback>
-                                <Text>ZN</Text>
-                            </AvatarFallback>
-                        </Avatar>
+                <Card className='w-full max-w-sm shadow-none p-0'>
+                    <CardContent className='flex-row align-center justify-left p-0 pl-2'>
+                        <View className='flex-col align-center justify-center'> 
+                            <Avatar alt="Zach Nugent's Avatar">
+                                <AvatarImage source={{ uri: "https://github.com/a0m0rajab.png" }} />
+                                <AvatarFallback>
+                                    <Text>ZN</Text>
+                                </AvatarFallback>
+                            </Avatar>
+                        </View>
+                        <View className='flex-col'>
+                            <CardHeader>
+                                <CardTitle>
+                                    <Text>Zach Nugent</Text>
+                                </CardTitle>
+                                <CardDescription>
+                                    <Text>Software Engineer</Text>
+                                </CardDescription>
+                            </CardHeader>
+                        </View>
                     </CardContent>
-                    <CardFooter>
-                        <Text>Card Footer</Text>
-                    </CardFooter>
                 </Card>
             </TouchableOpacity>
         </Link>

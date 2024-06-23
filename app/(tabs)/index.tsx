@@ -57,6 +57,7 @@ export default function HomeScreen() {
         </ThemedText>
       </ThemedView>
       <UserCard />
+      <UserCard />
       <View >
         <Card className='w-full max-w-sm'>
           <CardHeader>

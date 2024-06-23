@@ -1,8 +1,9 @@
 import React from 'react';
 import { useStorageState } from './useStorageState';
+import { supabase } from '@/utils/supabase';
 
 const AuthContext = React.createContext<{
-  signIn: () => void;
+  signIn: (email:string,password:string) => void | any;
   signOut: () => void;
   session?: string | null;
   isLoading: boolean;
@@ -27,13 +28,27 @@ export function useSession() {
 
 export function SessionProvider(props: React.PropsWithChildren) {
   const [[isLoading, session], setSession] = useStorageState('session');
+  const [[isUserLoading, user], setUser] = useStorageState('user');
+
 
   return (
     <AuthContext.Provider
       value={{
-        signIn: () => {
+        signIn: async (email: string, password: string) => {
+          const { error, data } = await supabase.auth.signInWithPassword({
+            email,
+            password,
+          })
+          if (error) {
+            console.log(error)
+            return {
+              error,
+            }
+          }
           // Perform sign-in logic here
-          setSession('xxx');
+          setSession(JSON.stringify(data?.session));
+          setUser(JSON.stringify(data?.user));
+          return true;
         },
         signOut: () => {
           setSession(null);

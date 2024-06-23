@@ -27,17 +27,14 @@ export default function Auth() {
 
   async function signInWithEmail() {
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    })
-
+    const { error } = await signIn(email,password);
+    
     if (error) {
       Alert.alert(error.message)
       setLoading(false)
       return
     }
-    signIn();
+    
     router.replace('/');
     setLoading(false)
   }

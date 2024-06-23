@@ -73,12 +73,12 @@ export default function HomeScreen() {
         id="2"
       />
       <View >
-        <Link href="test" asChild>
+        <Link href="profile" asChild>
           <TouchableOpacity>
             <Card className='w-full max-w-sm'>
               <CardHeader>
-                <CardTitle>Card Title</CardTitle>
-                <CardDescription>Card Description</CardDescription>
+                <CardTitle>This is an example Card</CardTitle>
+                <CardDescription>Click on me to go to profile page</CardDescription>
               </CardHeader>
               <CardContent>
                 <Text>Card Content</Text>

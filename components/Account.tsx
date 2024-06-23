@@ -4,7 +4,18 @@ import { StyleSheet, View, Alert, Button } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import { Input } from './ui/input'
 
-export default function Account({ session }: { session: Session }) {
+export default function Account() {
+  const [session, setSession] = useState<Session | null>(null)
+
+  useEffect(() => {
+    supabase.auth.getSession().then(({ data: { session } }) => {
+      setSession(session)
+    })
+
+    supabase.auth.onAuthStateChange((_event, session) => {
+      setSession(session)
+    })
+  }, [])
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')

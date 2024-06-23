@@ -12,6 +12,8 @@ import {
   CardHeader,
   CardTitle,
 } from '~/components/ui/card';
+import UserCard from '@/components/userCard';
+import { Link } from 'expo-router';
 
 export default function HomeScreen() {
   return (
@@ -54,6 +56,7 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <UserCard />
       <View >
         <Card className='w-full max-w-sm'>
           <CardHeader>
@@ -62,20 +65,7 @@ export default function HomeScreen() {
           </CardHeader>
           <CardContent>
             <Text>Card Content</Text>
-          </CardContent>
-          <CardFooter>
-            <Text>Card Footer</Text>
-          </CardFooter>
-        </Card>
-      </View>
-      <View >
-        <Card className='w-full max-w-sm'>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Text>Card Content</Text>
+            <Link href={"test"}> hello world</Link>
           </CardContent>
           <CardFooter>
             <Text>Card Footer</Text>

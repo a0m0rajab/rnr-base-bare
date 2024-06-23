@@ -43,7 +43,8 @@
     "tailwind-merge": "^2.3.0",
     "tailwindcss": "^3.4.4",
     "tailwindcss-animate": "^1.0.7",
-    "expo-secure-store": "~13.0.1"
+    "expo-secure-store": "~13.0.1",
+    "expo-image-picker": "~15.0.5"
   },
   "devDependencies": {
     "@babel/core": "^7.20.0",

@@ -4,6 +4,7 @@ import { StyleSheet, View, Alert, Button } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import { Input } from './ui/input'
 import { Text } from './ui/text'
+import AvatarUploader from './AvatarUploader'
 
 export default function Account() {
   const [session, setSession] = useState<Session | null>(null)
@@ -96,7 +97,14 @@ export default function Account() {
   }
 
   return (
-    <View style={styles.container}>
+    <View style={styles.container} className='justify-center align-items-middle'>
+      <AvatarUploader
+        size={200}
+        url={avatarUrl}
+        onUpload={(url: string) => {
+          setAvatarUrl(url)
+          updateProfile({ username, website, avatar_url: url, fullName })
+        }}/>
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Text>Email</Text>
         <Input placeholder="Email" value={session?.user?.email} editable={false} />
@@ -117,7 +125,7 @@ export default function Account() {
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title={loading ? 'Loading ...' : 'Update'}
-          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, fullName})}
+          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, fullName })}
           disabled={loading}
         />
       </View>

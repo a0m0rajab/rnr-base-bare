@@ -15,8 +15,11 @@ import {
 } from '~/components/ui/card';
 import UserCard from '@/components/userCard';
 import { Link } from 'expo-router';
+import { useSession } from '@/context';
 
 export default function HomeScreen() {
+  const { signOut } = useSession();
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -84,6 +87,13 @@ export default function HomeScreen() {
           </CardFooter>
         </Card>
       </View>
+      <Text
+        onPress={() => {
+          // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
+          signOut();
+        }}>
+        Sign Out
+      </Text>
     </ParallaxScrollView>
   );
 }

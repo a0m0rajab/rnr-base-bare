@@ -1,9 +1,17 @@
-import { Image, StyleSheet, Platform } from 'react-native';
+import { Image, StyleSheet, Platform, View, Text } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from '~/components/ui/card';
 
 export default function HomeScreen() {
   return (
@@ -46,6 +54,34 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
+      <View >
+        <Card className='w-full max-w-sm'>
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Text>Card Content</Text>
+          </CardContent>
+          <CardFooter>
+            <Text>Card Footer</Text>
+          </CardFooter>
+        </Card>
+      </View>
+      <View >
+        <Card className='w-full max-w-sm'>
+          <CardHeader>
+            <CardTitle>Card Title</CardTitle>
+            <CardDescription>Card Description</CardDescription>
+          </CardHeader>
+          <CardContent>
+            <Text>Card Content</Text>
+          </CardContent>
+          <CardFooter>
+            <Text>Card Footer</Text>
+          </CardFooter>
+        </Card>
+      </View>
     </ParallaxScrollView>
   );
 }

@@ -1,3 +1,4 @@
+import { supabase } from '@/utils/supabase'
 import { Image, StyleSheet, Platform, View, Text } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';

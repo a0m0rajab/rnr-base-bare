@@ -56,8 +56,18 @@ export default function HomeScreen() {
           <ThemedText type="defaultSemiBold">app-example</ThemedText>.
         </ThemedText>
       </ThemedView>
-      <UserCard />
-      <UserCard />
+      <UserCard
+        avatar="https://www.github.com/a0m0rajab.png"
+        name="a0m0rajab"
+        role="Software Engineer"
+        id="1"
+      />
+      <UserCard
+        avatar="https://www.github.com/a0m0rajab.png"
+        name="a0m0rajab"
+        role="Software Engineer"
+        id="2"
+      />
       <View >
         <Card className='w-full max-w-sm'>
           <CardHeader>

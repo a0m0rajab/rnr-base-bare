@@ -3,6 +3,7 @@ import { supabase } from '@/utils/supabase'
 import { StyleSheet, View, Alert, Button } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import { Input } from './ui/input'
+import { Text } from './ui/text'
 
 export default function Account() {
   const [session, setSession] = useState<Session | null>(null)
@@ -20,6 +21,8 @@ export default function Account() {
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')
   const [avatarUrl, setAvatarUrl] = useState('')
+  const [fullName, setfullName] = useState('')
+
 
   useEffect(() => {
     if (session) getProfile()
@@ -32,7 +35,7 @@ export default function Account() {
 
       const { data, error, status } = await supabase
         .from('profiles')
-        .select(`username, website, avatar_url`)
+        .select(`username, website, avatar_url, full_name`)
         .eq('id', session?.user.id)
         .single()
       if (error && status !== 406) {
@@ -43,6 +46,7 @@ export default function Account() {
         setUsername(data.username)
         setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
+        setfullName(data.full_name)
       }
     } catch (error) {
       if (error instanceof Error) {
@@ -57,10 +61,12 @@ export default function Account() {
     username,
     website,
     avatar_url,
+    fullName
   }: {
     username: string
     website: string
-    avatar_url: string
+    avatar_url: string,
+    fullName: string
   }) {
     try {
       setLoading(true)
@@ -72,6 +78,7 @@ export default function Account() {
         website,
         avatar_url,
         updated_at: new Date(),
+        full_name: fullName
       }
 
       const { error } = await supabase.from('profiles').upsert(updates)
@@ -91,19 +98,26 @@ export default function Account() {
   return (
     <View style={styles.container}>
       <View style={[styles.verticallySpaced, styles.mt20]}>
+        <Text>Email</Text>
         <Input placeholder="Email" value={session?.user?.email} editable={false} />
       </View>
       <View style={styles.verticallySpaced}>
+        <Text>Full Name</Text>
+        <Input placeholder="Full name" value={fullName || ''} onChangeText={(text) => setfullName(text)} />
+      </View>
+      <View style={styles.verticallySpaced}>
+        <Text>Username</Text>
         <Input placeholder="Username" value={username || ''} onChangeText={(text) => setUsername(text)} />
       </View>
       <View style={styles.verticallySpaced}>
+        <Text>Website</Text>
         <Input placeholder="Website" value={website || ''} onChangeText={(text) => setWebsite(text)} />
       </View>
 
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Button
           title={loading ? 'Loading ...' : 'Update'}
-          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl })}
+          onPress={() => updateProfile({ username, website, avatar_url: avatarUrl, fullName})}
           disabled={loading}
         />
       </View>

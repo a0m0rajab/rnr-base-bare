@@ -17,8 +17,16 @@ import UserCard from '@/components/userCard';
 import { Link } from 'expo-router';
 import { useSession } from '@/context';
 
+async function getUsers() {
+  const { data, error, status } = await supabase
+    .from('profiles')
+    .select(`*`)
+  console.log(data, error, status)
+}
+
 export default function HomeScreen() {
   const { signOut } = useSession();
+  getUsers();
 
   return (
     <ParallaxScrollView

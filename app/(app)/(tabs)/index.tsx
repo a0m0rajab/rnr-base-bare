@@ -1,5 +1,5 @@
 import { supabase } from '@/utils/supabase'
-import { Image, StyleSheet, Platform, View, Text } from 'react-native';
+import { Image, StyleSheet, Platform, View, Text, TouchableOpacity } from 'react-native';
 
 import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
@@ -73,19 +73,22 @@ export default function HomeScreen() {
         id="2"
       />
       <View >
-        <Card className='w-full max-w-sm'>
-          <CardHeader>
-            <CardTitle>Card Title</CardTitle>
-            <CardDescription>Card Description</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <Text>Card Content</Text>
-            <Link href={"test"}> hello world</Link>
-          </CardContent>
-          <CardFooter>
-            <Text>Card Footer</Text>
-          </CardFooter>
-        </Card>
+        <Link href="test" asChild>
+          <TouchableOpacity>
+            <Card className='w-full max-w-sm'>
+              <CardHeader>
+                <CardTitle>Card Title</CardTitle>
+                <CardDescription>Card Description</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <Text>Card Content</Text>
+              </CardContent>
+              <CardFooter>
+                <Text>Card Footer</Text>
+              </CardFooter>
+            </Card>
+          </TouchableOpacity>
+        </Link>
       </View>
       <Text
         onPress={() => {

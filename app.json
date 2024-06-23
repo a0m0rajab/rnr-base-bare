@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "eagle-eye",
-    "slug": "eagle-eye",
+    "name": "rnr-base-bare",
+    "slug": "rnr-base-bare",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

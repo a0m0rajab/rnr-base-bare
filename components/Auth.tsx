@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
-import { Alert, StyleSheet, View, AppState, Button } from 'react-native'
+import { Alert, StyleSheet, View, AppState, Button, Image } from 'react-native'
 import { supabase } from '@/utils/supabase'
 import { Input } from './ui/input'
+import { useSession } from '@/context'
+import { router } from 'expo-router'
+import { Text } from './ui/text'
+import ParallaxScrollView from './ParallaxScrollView'
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -16,6 +20,7 @@ AppState.addEventListener('change', (state) => {
 })
 
 export default function Auth() {
+  const { signIn } = useSession();
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
@@ -27,7 +32,13 @@ export default function Auth() {
       password: password,
     })
 
-    if (error) Alert.alert(error.message)
+    if (error) {
+      Alert.alert(error.message)
+      setLoading(false)
+      return
+    }
+    signIn();
+    router.replace('/');
     setLoading(false)
   }
 
@@ -47,49 +58,48 @@ export default function Auth() {
   }
 
   return (
-    <View style={styles.container}>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Input
-          placeholder="Email"
-        //   leftIcon={{ type: 'font-awesome', name: 'envelope' }}
-          onChangeText={(text) => setEmail(text)}
-          value={email}
-        //   placeholder="email@address.com"
-          autoCapitalize={'none'}
+    <ParallaxScrollView 
+    headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
+      headerImage={
+        <Image
+          source={require('@/assets/images/partial-react-logo.png')}
+          style={{ height: 178, width: 290, bottom: 0, left: 0,  position: 'absolute'}}
         />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Input
-          placeholder="Password"
-        //   leftIcon={{ type: 'font-awesome', name: 'lock' }}
-          onChangeText={(text) => setPassword(text)}
-          value={password}
-          secureTextEntry={true}
-        //   placeholder="Password"
-          autoCapitalize={'none'}
-        />
-      </View>
-      <View style={[styles.verticallySpaced, styles.mt20]}>
-        <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
-      </View>
-      <View style={styles.verticallySpaced}>
-        <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+    }>
+    <View className='h-screen'>
+      <View className='container gap-2'>
+        <View >
+          <Text>Email</Text>
+          <Input
+            placeholder="Email"
+            //   leftIcon={{ type: 'font-awesome', name: 'envelope' }}
+            onChangeText={(text) => setEmail(text)}
+            value={email}
+            //   placeholder="email@address.com"
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View >
+          <Text>Password</Text>
+          <Input
+            placeholder="Password"
+            //   leftIcon={{ type: 'font-awesome', name: 'lock' }}
+            onChangeText={(text) => setPassword(text)}
+            value={password}
+            secureTextEntry={true}
+            //   placeholder="Password"
+            autoCapitalize={'none'}
+          />
+        </View>
+        <View >
+          <Button title="Sign in" disabled={loading} onPress={() => signInWithEmail()} />
+        </View>
+        <View >
+          <Button title="Sign up" disabled={loading} onPress={() => signUpWithEmail()} />
+        </View>
+
       </View>
     </View>
+    </ParallaxScrollView>
   )
 }
-
-const styles = StyleSheet.create({
-  container: {
-    marginTop: 40,
-    padding: 12,
-  },
-  verticallySpaced: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    alignSelf: 'stretch',
-  },
-  mt20: {
-    marginTop: 20,
-  },
-})

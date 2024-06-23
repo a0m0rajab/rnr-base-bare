@@ -89,6 +89,7 @@ export default function HomeScreen() {
       </View>
       <Text
         onPress={() => {
+          supabase.auth.signOut();
           // The `app/(app)/_layout.tsx` will redirect to the sign-in screen.
           signOut();
         }}>

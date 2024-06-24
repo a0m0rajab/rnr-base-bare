@@ -5,9 +5,11 @@ import { Session } from '@supabase/supabase-js'
 import { Input } from './ui/input'
 import { Text } from './ui/text'
 import AvatarUploader from './AvatarUploader'
+import { useSession } from '@/context'
 
 export default function Account() {
   const [session, setSession] = useState<Session | null>(null)
+  const { signOut } = useSession();
 
   useEffect(() => {
     supabase.auth.getSession().then(({ data: { session } }) => {
@@ -131,7 +133,7 @@ export default function Account() {
       </View>
 
       <View style={styles.verticallySpaced}>
-        <Button title="Sign Out" onPress={() => supabase.auth.signOut()} />
+        <Button title="Sign Out" onPress={() => signOut()} />
       </View>
     </View>
   )

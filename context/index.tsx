@@ -51,6 +51,7 @@ export function SessionProvider(props: React.PropsWithChildren) {
           return true;
         },
         signOut: () => {
+          supabase.auth.signOut();
           setSession(null);
         },
         session,

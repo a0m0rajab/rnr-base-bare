@@ -1,11 +1,9 @@
-import { Slot } from 'expo-router';
-import { SessionProvider } from '@/context/index';
+import { Stack } from "expo-router";
 
-export default function Root() {
-  // Set up the auth context and render our layout inside of it.
+export default function RootLayout() {
   return (
-    <SessionProvider>
-      <Slot />
-    </SessionProvider>
+    <Stack>
+      <Stack.Screen name="index" />
+    </Stack>
   );
 }

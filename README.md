@@ -1,27 +1,27 @@
 # Welcome to react native starter kit 👋
 
-This project is using 
+This project is using
+
 - [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app)
 - [React native Reusables](https://github.com/mrzachnugent/react-native-reusables) as UI library using [nativewind](https://www.nativewind.dev/)
 - [https://supabase.com/](https://supabase.com/) for the database an auth
 
 ## screens
 
-the app contains the next screens: 
-- sign up/log in screen 
-- profile editing screen 
-- cards screen 
-- user profile screen 
+the app contains the next screens:
+
+- sign up/log in screen
+- profile editing screen
+- cards screen
+- user profile screen
 
 which all uses expo router and have the minimum running example to start on top of it.
 
-## Setting up: 
+## Setting up:
 
-You need to have a supabase database and update the `.env` with the related links to get the project up. 
+You need to have a supabase database and update the `.env` with the related links to get the project up.
 
-As for the database you can start with [supabase template](https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native#set-up-the-database-schema), user management script, and run it to work with that. 
-
-
+As for the database you can start with [supabase template](https://supabase.com/docs/guides/getting-started/tutorials/with-expo-react-native#set-up-the-database-schema), user management script, and run it to work with that.
 
 ## Get started
 
@@ -46,15 +46,14 @@ In the output, you'll find options to open the app in a
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
 
-## Get a fresh project
+## Features
 
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+- NativeWind v4
+- Dark and light mode
+  - Android Navigation Bar matches mode
+  - Persistent mode
+- Common components
+  - ThemeToggle, Avatar, Button, Card, Progress, Text, Tooltip
 
 ## Learn more
 
@@ -65,10 +64,3 @@ To learn more about developing your project with Expo, look at the following res
 - [Env variables](https://docs.expo.dev/guides/environment-variables/)
 - [Expo + Supabase](https://docs.expo.dev/guides/using-supabase/)
 - [Pages and router](https://docs.expo.dev/router/create-pages/)
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.

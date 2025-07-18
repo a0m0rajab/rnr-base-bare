@@ -2,6 +2,7 @@ import { router } from 'expo-router';
 import { Text, View } from 'react-native';
 
 import { useSession } from '../utils/ctx';
+import Auth from '~/components/Auth';
 
 export default function SignIn() {
     const { signIn } = useSession();
@@ -16,6 +17,7 @@ export default function SignIn() {
                 }}>
                 Sign In
             </Text>
+            <Auth></Auth>
         </View>
     );
 }

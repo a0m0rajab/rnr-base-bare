@@ -1,5 +1,5 @@
-import Profile from '~/components/Profile';
+import Settings from '~/components/Settings';
 
-export default function Settings() {
-    return <Profile />;
+export default function SettingsTab() {
+    return <Settings />;
 }

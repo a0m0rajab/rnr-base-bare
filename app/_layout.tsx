@@ -1,6 +1,6 @@
 import { Stack } from 'expo-router';
 import { SessionProvider, useSession } from '../utils/ctx';
-import { SplashScreenController } from '../utils/splash';
+import { SplashProvider } from '../utils/splash';
 import { useEffect } from 'react';
 import { router } from 'expo-router';
 
@@ -8,8 +8,9 @@ export default function Root() {
     // Set up the auth context and render our layout inside of it.
     return (
         <SessionProvider>
-            <SplashScreenController />
-            <RootNavigator />
+            <SplashProvider>
+                <RootNavigator />
+            </SplashProvider>
         </SessionProvider>
     );
 }

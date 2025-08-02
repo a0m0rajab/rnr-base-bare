@@ -9,6 +9,8 @@ const AuthContext = createContext<{
     signIn: (email: string, password: string) => Promise<{ error?: string }>;
     signUp: (email: string, password: string) => Promise<{ error?: string }>;
     signInWithApple: () => Promise<{ error?: string }>;
+    verifyOTP: (email: string, token: string) => Promise<{ error?: string }>;
+    resendOTP: (email: string) => Promise<{ error?: string }>;
     signOut: () => Promise<void>;
     session?: Session | null;
     isLoading: boolean;
@@ -16,6 +18,8 @@ const AuthContext = createContext<{
     signIn: async () => ({ error: "Not implemented" }),
     signUp: async () => ({ error: "Not implemented" }),
     signInWithApple: async () => ({ error: "Not implemented" }),
+    verifyOTP: async () => ({ error: "Not implemented" }),
+    resendOTP: async () => ({ error: "Not implemented" }),
     signOut: async () => { },
     session: null,
     isLoading: false,
@@ -66,6 +70,9 @@ export function SessionProvider({ children }: PropsWithChildren) {
                     const { error } = await supabase.auth.signUp({
                         email,
                         password,
+                        options: {
+                            emailRedirectTo: undefined, // Disable email confirmation link
+                        }
                     });
                     return { error: error?.message };
                 },
@@ -97,6 +104,21 @@ export function SessionProvider({ children }: PropsWithChildren) {
                         }
                         return { error: e.message || 'Apple Sign In failed' };
                     }
+                },
+                verifyOTP: async (email: string, token: string) => {
+                    const { error } = await supabase.auth.verifyOtp({
+                        email,
+                        token,
+                        type: 'signup'
+                    });
+                    return { error: error?.message };
+                },
+                resendOTP: async (email: string) => {
+                    const { error } = await supabase.auth.resend({
+                        type: 'signup',
+                        email
+                    });
+                    return { error: error?.message };
                 },
                 signOut: async () => {
                     await supabase.auth.signOut();

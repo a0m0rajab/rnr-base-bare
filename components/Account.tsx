@@ -1,25 +1,14 @@
 import { useState, useEffect } from 'react'
-import { supabase } from '@/utils/supabase'
+import { supabase } from '../utils/supabase'
 import { StyleSheet, View, Alert, Button } from 'react-native'
 import { Session } from '@supabase/supabase-js'
 import { Input } from './ui/input'
 import { Text } from './ui/text'
 import AvatarUploader from './AvatarUploader'
-import { useSession } from '@/context'
+import { useSession } from '../utils/ctx'
 
 export default function Account() {
-  const [session, setSession] = useState<Session | null>(null)
-  const { signOut } = useSession();
-
-  useEffect(() => {
-    supabase.auth.getSession().then(({ data: { session } }) => {
-      setSession(session)
-    })
-
-    supabase.auth.onAuthStateChange((_event, session) => {
-      setSession(session)
-    })
-  }, [])
+  const { session, signOut } = useSession();
   const [loading, setLoading] = useState(true)
   const [username, setUsername] = useState('')
   const [website, setWebsite] = useState('')
@@ -106,7 +95,7 @@ export default function Account() {
         onUpload={(url: string) => {
           setAvatarUrl(url)
           updateProfile({ username, website, avatar_url: url, fullName })
-        }}/>
+        }} />
       <View style={[styles.verticallySpaced, styles.mt20]}>
         <Text>Email</Text>
         <Input placeholder="Email" value={session?.user?.email} editable={false} />

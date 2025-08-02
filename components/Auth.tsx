@@ -6,6 +6,7 @@ import { Button } from './ui/button'
 import { Text } from './ui/text'
 import { Label } from '~/components/ui/label';
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from './ui/card';
+import { useSession } from '~/utils/ctx';
 
 // Tells Supabase Auth to continuously refresh the session automatically if
 // the app is in the foreground. When this is added, you will continue to receive
@@ -24,30 +25,25 @@ export default function Auth() {
   const [password, setPassword] = useState('')
   const [loading, setLoading] = useState(false)
   const [isSignUp, setIsSignUp] = useState(false)
+  const { signIn, signUp } = useSession()
 
   async function signInWithEmail() {
     setLoading(true)
-    const { error } = await supabase.auth.signInWithPassword({
-      email: email,
-      password: password,
-    })
+    const { error } = await signIn(email, password)
 
-    if (error) Alert.alert('Sign In Error', error.message)
+    if (error) Alert.alert('Sign In Error', error)
     setLoading(false)
   }
 
   async function signUpWithEmail() {
     setLoading(true)
-    const {
-      data: { session },
-      error,
-    } = await supabase.auth.signUp({
-      email: email,
-      password: password,
-    })
+    const { error } = await signUp(email, password)
 
-    if (error) Alert.alert('Sign Up Error', error.message)
-    if (!session) Alert.alert('Success', 'Please check your inbox for email verification!')
+    if (error) {
+      Alert.alert('Sign Up Error', error)
+    } else {
+      Alert.alert('Success', 'Please check your inbox for email verification!')
+    }
     setLoading(false)
   }
 

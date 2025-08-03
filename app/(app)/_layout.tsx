@@ -52,7 +52,9 @@ const useIsomorphicLayoutEffect =
 function useSetWebBackgroundClassName() {
   useIsomorphicLayoutEffect(() => {
     // Adds the background color to the html element to prevent white background on overscroll.
-    document.documentElement.classList.add('bg-background');
+    if (typeof document !== 'undefined') {
+      document.documentElement.classList.add('bg-background');
+    }
   }, []);
 }
 
